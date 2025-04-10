@@ -11,8 +11,7 @@ export default function RecordItem(props) {
           style={({ pressed }) => pressed && styles.pressedItem}
         >
           <Text style={styles.recordText}>
-            Game 1: Computer needed {props.rounds} rounds to guess{" "}
-            {props.number}
+            Computer needed {props.rounds} rounds to guess {props.number}
           </Text>
         </Pressable>
       </View>

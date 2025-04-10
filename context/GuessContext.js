@@ -6,7 +6,7 @@ const GuessProvider = ({ children }) => {
   const [userNumber, setUserNumber] = useState(0);
   const [gameIsOver, setGameIsOver] = useState(true);
   const [guessRounds, setGuessRounds] = useState(0);
-  const [stats, setStats] = useState([]);
+  const [records, setRecords] = useState([]);
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
@@ -23,16 +23,16 @@ const GuessProvider = ({ children }) => {
     setGuessRounds(0);
   }
 
-  function addStatHandler() {
-    setStats((currentStats) => [
-      ...currentStats,
-      { id: Math.random().toString(), guessRounds, userNumber },
+  function addRecordHandler() {
+    setRecords((currentRecords) => [
+      ...currentRecords,
+      { guessRounds, userNumber },
     ]);
   }
 
-  function deleteStatHandler(id) {
-    setStats((currentStats) => {
-      return currentStats.filter((stat) => stat.id !== id);
+  function deleteRecordHandler(id) {
+    setRecords((currentRecords) => {
+      return currentRecords.filter((stat) => stat.id !== id);
     });
   }
 
@@ -45,9 +45,9 @@ const GuessProvider = ({ children }) => {
         pickedNumberHandler,
         gameOverHandler,
         startNewGameHandler,
-        addStatHandler,
-        deleteStatHandler,
-        stats,
+        addRecordHandler,
+        deleteRecordHandler,
+        records,
       }}
     >
       {children}

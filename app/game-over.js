@@ -7,7 +7,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../constants/colors";
 
 export default function GameOver() {
-  const { userNumber, guessRounds, startNewGameHandler, addStatHandler } =
+  const { userNumber, guessRounds, startNewGameHandler, addRecordHandler } =
     useGuess();
 
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function GameOver() {
       </Text>
       <PrimaryButton
         onPress={() => {
-          addStatHandler();
+          addRecordHandler();
           startNewGameHandler();
           router.navigate("/");
         }}

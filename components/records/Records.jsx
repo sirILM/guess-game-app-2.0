@@ -1,19 +1,19 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import RecordItem from "./RecordItem";
 
-export default function Records({ stats, deleteStatHandler }) {
+export default function Records({ records, deleteRecordHandler }) {
   return (
     <View style={styles.appContainer}>
       <View style={styles.recordsContainer}>
         <FlatList
-          data={stats}
+          data={records}
           renderItem={(itemData) => {
             return (
               <RecordItem
                 id={itemData.item.id}
                 rounds={itemData.item.guessRounds}
                 number={itemData.item.userNumber}
-                onDeleteItem={deleteStatHandler}
+                onDeleteItem={deleteRecordHandler}
               />
             );
           }}

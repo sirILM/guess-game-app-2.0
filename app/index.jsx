@@ -12,7 +12,7 @@ import Records from "../components/records/Records";
 
 export default function StartGame() {
   const [enteredNumber, setEnteredNumber] = useState("");
-  const { pickedNumberHandler, stats, deleteStatHandler } = useGuess();
+  const { pickedNumberHandler, records, deleteRecordHandler } = useGuess();
   const router = useRouter();
 
   function numberInputHandler(enteredText) {
@@ -60,7 +60,7 @@ export default function StartGame() {
           </View>
         </View>
       </Card>
-      <Records stats={stats} deleteStatHandler={deleteStatHandler} />
+      <Records records={records} deleteRecordHandler={deleteRecordHandler} />
     </View>
   );
 }
