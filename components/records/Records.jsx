@@ -11,8 +11,8 @@ export default function Records({ records, deleteRecordHandler }) {
             return (
               <RecordItem
                 id={itemData.item.id}
-                rounds={itemData.item.guessRounds}
-                number={itemData.item.userNumber}
+                rounds={itemData.item.guess_rounds}
+                number={itemData.item.user_number}
                 onDeleteItem={deleteRecordHandler}
               />
             );

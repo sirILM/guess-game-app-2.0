@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { addRecord, deleteRecord, getRecords } from "../services/apiRecords";
 
 const GuessContext = createContext();
 
@@ -7,6 +8,12 @@ const GuessProvider = ({ children }) => {
   const [gameIsOver, setGameIsOver] = useState(true);
   const [guessRounds, setGuessRounds] = useState(0);
   const [records, setRecords] = useState([]);
+
+  useEffect(() => {
+    getRecords().then((data) => {
+      setRecords(data);
+    });
+  }, [records]);
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
@@ -24,16 +31,11 @@ const GuessProvider = ({ children }) => {
   }
 
   function addRecordHandler() {
-    setRecords((currentRecords) => [
-      ...currentRecords,
-      { guessRounds, userNumber },
-    ]);
+    addRecord(guessRounds, userNumber);
   }
 
   function deleteRecordHandler(id) {
-    setRecords((currentRecords) => {
-      return currentRecords.filter((stat) => stat.id !== id);
-    });
+    deleteRecord(id);
   }
 
   return (
