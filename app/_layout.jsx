@@ -23,7 +23,9 @@ export default function RootLayout() {
         style={styles.rootScreen}
       >
         <ImageBackground
-          source={require("../assets/images/background.png")}
+          source={{
+            uri: "https://ahjanudiomayubxpquam.supabase.co/storage/v1/object/public/images//background.png",
+          }}
           resizeMode="cover"
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}

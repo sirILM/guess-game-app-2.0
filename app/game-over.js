@@ -18,7 +18,9 @@ export default function GameOver() {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require("../assets/images/success.png")}
+          source={{
+            uri: "https://ahjanudiomayubxpquam.supabase.co/storage/v1/object/public/images//success.png",
+          }}
         />
       </View>
       <Text style={styles.summaryText}>
