@@ -13,7 +13,9 @@ const GuessProvider = ({ children }) => {
     getRecords().then((data) => {
       setRecords(data);
     });
-  }, [records]);
+  }, []);
+
+  console.log(records);
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
@@ -32,10 +34,20 @@ const GuessProvider = ({ children }) => {
 
   function addRecordHandler() {
     addRecord(guessRounds, userNumber);
+    setRecords((currentRecords) => [
+      ...currentRecords,
+      {
+        guess_rounds: guessRounds,
+        user_number: userNumber,
+      },
+    ]);
   }
 
   function deleteRecordHandler(id) {
     deleteRecord(id);
+    setRecords((currentRecords) => {
+      return currentRecords.filter((record) => record.id !== id);
+    });
   }
 
   return (
