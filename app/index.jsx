@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { TextInput, View, StyleSheet, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import { TextInput, View, StyleSheet, Alert, Button } from "react-native";
 import { useGuess } from "../context/GuessContext";
 import { useRouter } from "expo-router";
+import { signOut } from "../services/apiAuth";
+import { getRecords } from "../services/apiRecords";
 
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
@@ -12,8 +14,18 @@ import Records from "../components/records/Records";
 
 export default function StartGame() {
   const [enteredNumber, setEnteredNumber] = useState("");
-  const { pickedNumberHandler, records, deleteRecordHandler } = useGuess();
+  const { pickedNumberHandler, records, deleteRecordHandler, setRecords } =
+    useGuess();
+
   const router = useRouter();
+
+  useEffect(() => {
+    getRecords().then((data) => {
+      console.log(data);
+
+      setRecords(data);
+    });
+  }, [setRecords]);
 
   function numberInputHandler(enteredText) {
     setEnteredNumber(enteredText);
@@ -61,6 +73,9 @@ export default function StartGame() {
         </View>
       </Card>
       <Records records={records} deleteRecordHandler={deleteRecordHandler} />
+      <View style={{ marginBottom: "50" }}>
+        <Button title="Sign Out" onPress={() => signOut()} color="#85939E" />
+      </View>
     </View>
   );
 }

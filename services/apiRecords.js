@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase from "../lib/supabase";
 
 export async function getRecords() {
   let { data: records, error } = await supabase.from("records").select("*");

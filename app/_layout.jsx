@@ -8,9 +8,25 @@ import {
   StatusBar,
   StyleSheet,
 } from "react-native";
+import { useEffect, useState } from "react";
+
 import Colors from "../constants/colors";
+import supabase from "../lib/supabase";
+import Login from "./login";
 
 export default function RootLayout() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
   useFonts({
     "open-sans": require("../assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
@@ -32,7 +48,9 @@ export default function RootLayout() {
         >
           <SafeAreaView style={styles.rootScreen}>
             <StatusBar />
-            <Slot />
+            {/* <Slot /> */}
+            {!session && !session?.user && <Login />}
+            {session && session?.user && <Slot />}
           </SafeAreaView>
         </ImageBackground>
       </LinearGradient>

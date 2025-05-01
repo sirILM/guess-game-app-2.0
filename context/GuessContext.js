@@ -9,13 +9,13 @@ const GuessProvider = ({ children }) => {
   const [guessRounds, setGuessRounds] = useState(0);
   const [records, setRecords] = useState([]);
 
-  useEffect(() => {
-    getRecords().then((data) => {
-      setRecords(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getRecords().then((data) => {
+  //     setRecords(data);
+  //   });
+  // }, []);
 
-  console.log(records);
+  // console.log(records);
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
@@ -62,6 +62,7 @@ const GuessProvider = ({ children }) => {
         addRecordHandler,
         deleteRecordHandler,
         records,
+        setRecords,
       }}
     >
       {children}
